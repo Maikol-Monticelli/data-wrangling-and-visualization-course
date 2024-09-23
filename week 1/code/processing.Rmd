@@ -1,7 +1,7 @@
 ---
 title: "Evaluations of positive and negative stimuli using the Affective Misattribution Procedure (AMP) and self-reports"
 subtitle: "Data processing"
-author: "Template: Ian Hussey; content: [Student name]"
+author: "Template: Ian Hussey; content: [Maikol Monticelli]"
 date: "`r format(Sys.time(), '%d %B, %Y')`"
 output:
   html_document:
@@ -34,9 +34,11 @@ library(stringr)
 # Get data
 
 ```{r}
+#Two .. tells R to move one folder up, so that you dont need to always set the Work directory
+#Janitor::clean_name helps to have names that R can use 
 
 # demographics
-data_demographics_raw_messy <- read_csv("../data/raw/data_demographics_raw_messy.csv", skip = 2) |>
+data_demographics_raw_messy <- read_delim("../data/raw/data_demographics_raw_messy.csv", skip = 2, delim = ";") |>
   janitor::clean_names()
 
 data_demographics_raw <- read_csv("../data/raw/data_demographics_raw.csv") |>

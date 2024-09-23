@@ -48,6 +48,7 @@ I have prepended each function below with package it comes from so that you know
 
 The packages these functions come from, which must be loaded to use them.
 
+
 ```{r}
 
 library(readr)
