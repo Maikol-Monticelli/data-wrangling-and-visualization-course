@@ -136,6 +136,8 @@ Useful arguments:
 ```
 
 ## filter
+- it is for rows
+- you can use filter(row %in% c(x,y,z)) to filter any item in the vector mentioned
 
 ```{r}
 
@@ -159,6 +161,8 @@ slice(mtcars, 2:n()) # this should have 31 rows
 ```
 
 ## select
+ - it selects column's, it helps to figure and filter out the most important data from big datasets 
+ - it is for column's
 
 ```{r}
 
@@ -207,6 +211,7 @@ slice(mtcars, 2:n()) # this should have 31 rows
 ```
 
 ## distinct
+ - shows the distinct answers that the participants gave
 
 ```{r}
 

@@ -57,12 +57,53 @@ data_amp_raw <- read_csv("../data/raw/data_amp_raw.csv") |>
 # Demographics
 
 Clean the demographics data so that summaries of age and gender can be made in the analysis.
+ - insert chunks with ctrl + alt + i
+ - The pipe helps organizing the code and make it step by step
+ - %>% tidyverse --> ctrl + shift +m
+ - #|> base R version, is more computation efficient, because is written easier
+ - you can set the equivalence of something by usind age = "age" 
 
 ```{r}
 
-#dat_age_gender <- data_demographics_raw 
+#dat_age_gender <- data_demographics_raw %>%
+ # rename(unique_id = subject,item = trialcode) %>% 
+  #select(unique_id,item,response)
+
+#temp <- dat_age_gender %>%
+ # filter(item == "age")
+
+#wrangle out the demographic datas out of the rows
+dat_age_gender <- data_demographics_raw %>%
+  #rename for clarity
+  rename(unique_id = subject,item = trialcode) %>% 
+  #select useful columns
+  select(unique_id,item,response) %>% 
+  #retain rows that we need
+  filter(item == "age") %>% 
+  mutate(response = str_remove_all(response, "\\D"),
+         response = na_if(response,""),
+         response = as.numeric(response))
+
+#temp <- dat_age_gender %>% 
+ # distinct(response)
+
+#temp2 <- dat_age_gender %>% 
+  #adds a new column to the dataset or you can update the content of the column 
+  # mutate(unique_id_2 = unique_id * 2) %>% 
+  # mutate(unique_id = unique_id_2)
+
+library(stringr)
+#temp2 <- dat_age_gender %>% 
+ # mutate(response = str_replace_all(response, "\\D"),
+  #       response = na_if(response,""))
+
+#check data type for each column
+#sapply(dat_age_gender , class)
+
+#Homework , make the same for gender 
 
 ```
+
 
 # Exclusions / data quality
 
