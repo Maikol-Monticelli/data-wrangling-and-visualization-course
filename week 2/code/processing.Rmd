@@ -62,6 +62,8 @@ Clean the demographics data so that summaries of age and gender can be made in t
  - %>% tidyverse --> ctrl + shift +m
  - #|> base R version, is more computation efficient, because is written easier
  - you can set the equivalence of something by usind age = "age" 
+ 
+ # Extracting Age
 
 ```{r}
 
@@ -100,8 +102,28 @@ library(stringr)
 #check data type for each column
 #sapply(dat_age_gender , class)
 
-#Homework , make the same for gender 
 
+```
+
+  # Extracting Gender
+ - grepl: Allows pattern matching ->  based on common variations of the terms you want to standardize
+ - case_when: Checks different conditions to categorize the column
+ - TRUE ~ NA_character_: any response that doesn’t match the patterns gets an NA
+
+```{r}
+#temp <- data_gender %>%
+  #distinct(response) -> used to check what are the options in the column Response 
+
+data_gender <- data_demographics_raw %>% 
+  rename(unique_id_nr = subject,item = trialcode) %>% 
+  select(unique_id_nr,item,response) %>% 
+  filter(item == "gender") %>% 
+  mutate(response = case_when(grepl("Female|female|FEMALE|Woman",response) ~ "Female",
+                              grepl("Male|male|MALE",response) ~ "Male",
+                              grepl("non binary|Non-Binary",response) ~ "Non-Binary",
+                              TRUE ~ NA_character_))
+
+  
 ```
 
 
