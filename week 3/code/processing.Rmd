@@ -55,6 +55,10 @@ data_amp_raw <- read_csv("../data/raw/data_amp_raw.csv") |>
 # Demographics
 
 Clean the demographics data so that summaries of age and gender can be made in the analysis.
+- Start out with count() and then distinct () so that you know the type of characters and how many of them are there 
+- Then follow the steps 
+- cntl + chift + c um alles zu #
+- alt + maus drag down to write on multiple lines
 
 ```{r}
 
@@ -88,7 +92,53 @@ dat_gender <- data_demographics_raw |>
          gender = str_remove_all(gender, "[\\d.]"),
          gender = na_if(gender, "")) |>
   select(unique_id, gender)
-  #select(-item) # alternative: negative selection
+  #select(-item) # alternative: negative selection, you cann tell which column you want to leave out
+
+
+#dat_age_gender <- dont use it, assuming that the columns have the same order
+ # bind_cols(dat_age,
+  #          dat_gender)
+
+
+#clean duplicate subject
+
+data_demographics_raw %>% 
+  count(subject) %>% 
+  arrange(desc(n))
+  
+data_unique_id <- data_demographics_raw %>% 
+  filter(subject != "246532124")
+
+
+dat_age_gender <- 
+  full_join(dat_age,
+            dat_gender,
+            by = "unique_id")
+
+# dat_age_gender <- 
+#   left_join(dat_age,
+#             dat_gender,
+#             by = "unique_id")
+# 
+# 
+# dat_age_gender <- 
+#   semi_join(dat_age,
+#             dat_gender,
+#             by = "unique_id")
+# 
+# 
+# dat_age_gender <- 
+#   right_join(dat_age,
+#             dat_gender,
+#             by = "unique_id")
+# 
+# 
+# 
+# dat_age_gender <- 
+#   inner_join(dat_age,
+#             dat_gender,
+#             by = "unique_id")
+
 
 ```
 
